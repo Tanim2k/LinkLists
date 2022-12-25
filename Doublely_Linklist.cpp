@@ -21,9 +21,9 @@ Node *head;
 Node *temp;
 Node *tail;
 
-void create(int x)
+void createLast(int x)
 {
-  Node *node=new Node(x);
+  Node * node=new Node(x);
 
   if(head==NULL)
   {
@@ -36,6 +36,20 @@ void create(int x)
   tail=node;
   tail->prev=temp;
   
+
+}
+
+void createFirst(int x)
+{
+    Node *temp=new Node(x);
+     if(head==NULL)
+  {
+    head=temp;
+    return ;
+  }
+  temp->next=head;
+  head->prev=temp;
+  head=temp;
 
 }
 
@@ -80,32 +94,44 @@ void Delete(int x)
 }
 void printreverse()
 {
-   Node *p1=tail;
-  cout<<"Reverse--->";
-  while(tail->prev!=NULL)
-  {
-      cout<<p1->data<<" ";
-      p1=p1->prev;
-  }
-  cout<<p1->data<<endl;
+   Node *temp=head;
+
+   while(temp->next!=NULL)
+   {
+    temp=temp->next;
+   }
+   tail=temp;
+ cout<<"Reverse -> ";
+   while(tail->prev!=NULL)
+   {
+    cout<<tail->data<<" ";
+    tail=tail->prev;
+   }
+   cout<<tail->data<<endl;
+}
+
+void convertingCircular()
+{
+  Node *temp=head;
+
+  while(temp->next!=NULL)
+    temp=temp->next;
+
+  temp->next=head;
+  head->prev=temp;
 }
 
 int main()
 {
-     int n;
-     cin>>n;
-
-     for(int i=0;i<n;i++)
-     {
-      int x;
-      cin>>x;
-      create(x);
-     }
-     print();
-     Delete(3);
-     print();
-     Delete(1);
+     createLast(5);
+     createLast(6);
+     createFirst(4);
+     createFirst(3);
+     createFirst(2);
+     createFirst(1);
      print();
      printreverse();
+     convertingCircular();
+     print();
      
 }
